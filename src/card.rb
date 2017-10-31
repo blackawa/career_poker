@@ -2,6 +2,7 @@ class Card
   attr_reader :number
 
   def initialize(number)
+    raise ArgumentError, "invalid number (given: #{number}, expect: 1..13)" unless ORDER.include? number
     @number = number
   end
 
