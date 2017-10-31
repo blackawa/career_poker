@@ -20,20 +20,20 @@ describe 'card' do
       end
     end
   end
-  describe '<' do
+  describe 'stronger_than?' do
     describe '2と3' do
       it '2の方が大きい' do
-        assert(Card.new(3) < Card.new(2))
+        assert(Card.new(2).stronger_than? Card.new(3))
       end
     end
     describe '3と4' do
       it '4の方が大きい' do
-        assert(Card.new(3) < Card.new(4))
+        assert(Card.new(4).stronger_than? Card.new(3))
       end
     end
     describe '13と1' do
       it '1の方が大きい' do
-        assert(Card.new(13) < Card.new(1))
+        assert(Card.new(1).stronger_than? Card.new(13))
       end
     end
   end

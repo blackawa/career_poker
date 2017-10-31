@@ -6,8 +6,8 @@ class Card
     @number = number
   end
 
-  def <(another)
-    ORDER.index(self.number) < ORDER.index(another.number)
+  def stronger_than?(another)
+    ORDER.index(another.number) < ORDER.index(self.number)
   end
 
   private

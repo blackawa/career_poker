@@ -6,13 +6,14 @@ class Board
   end
 
   def put_down(card)
-    return false if put_downable?(card)
+    return false unless put_downable?(card)
     cards << card
   end
 
   private
 
   def put_downable?(card)
-    cards.last < card
+    return true if cards.empty?
+    card.stronger_than? self.cards.last
   end
 end
