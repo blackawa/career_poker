@@ -19,6 +19,11 @@ describe 'card' do
         assert_raises(ArgumentError) { Card.new(14) }
       end
     end
+    describe 'joker' do
+      it 'initializeできる' do
+        assert(Card.new(:joker))
+      end
+    end
   end
   describe 'stronger_than?' do
     describe '2と3' do
