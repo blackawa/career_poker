@@ -14,7 +14,7 @@ describe 'eight' do
     describe '効果を発動すると' do
       it '場のカードがリセットされる' do
         Effect::Eight.new.present @board
-        assert(@board.cards.size == 0)
+        assert(@board.stack.size == 0)
       end
     end
   end
