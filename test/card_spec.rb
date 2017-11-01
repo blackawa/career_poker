@@ -41,5 +41,10 @@ describe 'card' do
         assert(Card.new(1).stronger_than? Card.new(13))
       end
     end
+    describe '2とjoker' do
+      it 'jokerの方が大きい' do
+        assert(Card.new(:joker).stronger_than? Card.new(2))
+      end
+    end
   end
 end
