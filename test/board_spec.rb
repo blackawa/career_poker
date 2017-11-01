@@ -32,4 +32,21 @@ describe 'board' do
       end
     end
   end
+  describe 'clean' do
+    describe '空のboardに打つと' do
+      it '変わらない' do
+       assert(@board.cards.size == 0)
+       @board.clean
+       assert(@board.cards.size == 0)
+      end
+    end
+    describe 'すでにカードがつまれているboardに打つと' do
+      it 'つまれたカードがリセットされる' do
+        @board.put_down Card.new(3)
+        assert(@board.cards.size == 1)
+        @board.clean
+        assert(@board.cards.size == 0)
+      end
+    end
+  end
 end

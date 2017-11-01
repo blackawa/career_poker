@@ -8,6 +8,12 @@ class Board
   def put_down(card)
     return false unless put_downable?(card)
     cards << card
+    card.present_effect(self)
+    true
+  end
+
+  def clean
+    @cards = []
   end
 
   private
