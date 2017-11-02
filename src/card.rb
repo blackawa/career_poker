@@ -1,4 +1,11 @@
 class Card
+  attr_reader :number
+
+  def initialize(number)
+    raise ArgumentError, "invalid number (given: #{number}, expect: 1..13)" unless cardifiable?(number)
+    @number = number
+  end
+
   # @return Integer a strenth of a card.
   def strength
     raise NotImplementedError, "define #{self.class}##{__method__}"
@@ -10,8 +17,9 @@ class Card
     another.strength < self.strength
   end
 
-  # Do something you want after a card is put down on board.
-  def present_effect(board)
+  private
+
+  def cardifiable?(number)
     raise NotImplementedError, "define #{self.class}##{__method__}"
   end
 end

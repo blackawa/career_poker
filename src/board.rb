@@ -1,15 +1,20 @@
 class Board
-  attr_reader :stack
+  attr_reader :stack, :effects
 
-  def initialize
+  def initialize(effects = [Effect::Eight.new])
     @stack = []
+    @effects = effects
   end
 
   def put_down(card)
     return false unless put_downable?(card)
     stack << card
-    card.present_effect(self)
+    present_effects
     true
+  end
+
+  def top
+    stack.last
   end
 
   def clean
@@ -20,6 +25,10 @@ class Board
 
   def put_downable?(card)
     return true if stack.empty?
-    card.stronger_than? self.stack.last
+    card.stronger_than? self.top
+  end
+
+  def present_effects
+    effects.each { |e| e.present self }
   end
 end
