@@ -1,29 +1,17 @@
 class Card
-  attr_reader :number, :effect
-
-  def initialize(number)
-    raise ArgumentError, "invalid number (given: #{number}, expect: 1..13, or :joker)" unless cardifiable?(number)
-    @number = number
-
-    if number == 8
-      @effect = Effect::Eight.new
-    end
+  # @return Integer a strenth of a card.
+  def strength
+    raise NotImplementedError, "define #{self.class}##{__method__}"
   end
 
+  # Check if card is stronger than another.
+  # @return Boolean true if card is stronger than another.
   def stronger_than?(another)
-    ORDER.index(another.number) < ORDER.index(self.number)
+    another.strength < self.strength
   end
 
+  # Do something you want after a card is put down on board.
   def present_effect(board)
-    return unless @effect
-    @effect.present(board)
-  end
-
-  private
-
-  ORDER = [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 1, 2, :joker]
-
-  def cardifiable?(number)
-    ORDER.include? number || :joker == number
+    raise NotImplementedError, "define #{self.class}##{__method__}"
   end
 end
