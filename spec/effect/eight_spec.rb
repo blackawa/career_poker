@@ -3,18 +3,28 @@ require 'minitest/autorun'
 require '../../src/board.rb'
 require '../../src/effect/eight.rb'
 require '../../src/card.rb'
+require '../../src/numeric_card.rb'
+require '../../src/joker_card.rb'
 
 describe 'eight' do
   describe '#present' do
-    def setup
+    before do
       @board = Board.new
-      @board.put_down Card.new(3)
-      @board.put_down Card.new(2)
+      @board.instance_variable_set(:@stack, [NumericCard.new(3), NumericCard.new(4)])
     end
-    describe '効果を発動すると' do
+    describe '8が出された場の場合' do
       it '場のカードがリセットされる' do
+        @board.instance_variable_set(:@stack, @board.stack << NumericCard.new(8))
+        assert(@board.stack.size == 3)
         Effect::Eight.new.present @board
         assert(@board.stack.size == 0)
+      end
+    end
+    describe '8が出されていない場の場合' do
+      it '場のカードには何も起こらない' do
+        assert(@board.stack.size == 2)
+        Effect::Eight.new.present @board
+        assert(@board.stack.size == 2)
       end
     end
   end
