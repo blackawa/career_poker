@@ -10,11 +10,11 @@ describe 'eight' do
   describe '#present' do
     before do
       @board = Board.new
-      @board.instance_variable_set(:@stack, [NumericCard.new(3), NumericCard.new(4)])
+      @board.instance_variable_set(:@stack, [NumericCard.new(3, :spade), NumericCard.new(4, :spade)])
     end
     describe '8が出された場の場合' do
       it '場のカードがリセットされる' do
-        @board.instance_variable_set(:@stack, @board.stack << NumericCard.new(8))
+        @board.instance_variable_set(:@stack, @board.stack << NumericCard.new(8, :spade))
         assert(@board.stack.size == 3)
         Effect::Eight.new.present @board
         assert(@board.stack.size == 0)
