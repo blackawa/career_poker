@@ -1,9 +1,10 @@
 class Board
-  attr_reader :stack, :effects
+  attr_reader :stack, :effects, :strengths
 
-  def initialize(effects = [Effect::Eight.new])
+  def initialize(effects = [Effect::Eight.new], strengths = [Strength::NumericAscending.new])
     @stack = []
     @effects = effects
+    @strengths = strengths
   end
 
   def put_down(card)
@@ -25,7 +26,7 @@ class Board
 
   def put_downable?(card)
     return true if stack.empty?
-    card.stronger_than? self.top
+    strengths.any? { |s| s.stronger_than?(self, card) }
   end
 
   def present_effects

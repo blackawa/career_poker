@@ -7,16 +7,16 @@ class NumericCard < Card
     @suit = suit
   end
 
-  def strength
-    ORDER.index(self.number)
+  def order
+    ORDERS.index(self.number)
   end
 
   private
 
-  ORDER = [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 1, 2]
+  ORDERS = [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 1, 2]
   SUITS = [:spade, :club, :diamond, :heart]
 
   def cardifiable?(number, suit)
-    ORDER.include?(number) && SUITS.include?(suit)
+    ORDERS.include?(number) && SUITS.include?(suit)
   end
 end

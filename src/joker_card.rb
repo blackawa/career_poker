@@ -1,7 +1,10 @@
 class JokerCard < Card
-  # return number big enough to be stronger than every other cards.
-  def strength
+  def order
     1024
+  end
+
+  def number
+    nil
   end
 
   def joker?
